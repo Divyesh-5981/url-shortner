@@ -1,24 +1,27 @@
 import mongoose from "mongoose";
 
 // Schema
-const urlSchema = mongoose.Schema({
-	shortId: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-	redirectURL: {
-		type: String,
-		required: true,
-	},
-	visitHistory: [
-		{
-			timeStamp: {
-				type: Number,
-			},
+const urlSchema = mongoose.Schema(
+	{
+		shortId: {
+			type: String,
+			required: true,
+			unique: true,
 		},
-	],
-});
+		redirectURL: {
+			type: String,
+			required: true,
+		},
+		visitHistory: [
+			{
+				timeStamp: {
+					type: Number,
+				},
+			},
+		],
+	},
+	{ timeStamps: true },
+);
 
 // URL model
 const URL = mongoose.model("URL", urlSchema);

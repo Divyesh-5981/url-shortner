@@ -7,11 +7,19 @@
 	"type": "module",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon index.js"
+		"start": "node index",
+		"dev": "nodemon index"
 	},
 	"dependencies": {
+		"dotenv": "^17.4.2",
 		"express": "^5.2.1",
 		"mongoose": "^9.5.0",
+		"nanoid": "^5.1.9"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.2.1",
+		"globals": "^17.5.0",
 		"nodemon": "^3.1.14"
 	}
 }
