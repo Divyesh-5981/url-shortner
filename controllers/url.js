@@ -17,7 +17,9 @@ const createUrl = async (req, res) => {
 			visitHistory: [],
 		});
 
-		return res.status(201).json({ message: "Created", shortURL: shortURL });
+		return res.status(201).render("Home", {
+			shortId: shortURL,
+		});
 	} catch (error) {
 		res.status(500).json({ message: "Internal server error", error });
 	}
@@ -25,8 +27,9 @@ const createUrl = async (req, res) => {
 
 const getUrls = async (_req, res) => {
 	try {
-		const result = await URLModel.find({});
-		res.status(200).json({ message: "Success", result });
+		const allUrls = await URLModel.find({});
+
+		res.status(200).json({ message: "Success", data: allUrls });
 	} catch (error) {
 		res.status(500).json({ message: "Internal server error", error });
 	}
@@ -45,7 +48,7 @@ const redirectUrl = async (req, res) => {
 	try {
 		const shortId = req.params.id;
 
-		const { redirectURL } = await URLModel.findOneAndUpdate(
+		const document = await URLModel.findOneAndUpdate(
 			{ shortId },
 			{
 				$push: {
@@ -56,9 +59,12 @@ const redirectUrl = async (req, res) => {
 			},
 		);
 
-		res.status(200).redirect(redirectURL);
+		if (!document) {
+			return res.status(404).json({ error: "Short URL not found" });
+		}
+
+		res.redirect(document.redirectURL);
 	} catch (error) {
-		await URLModel.deleteMany({});
 		res.status(500).json({ message: "Internal server error", error });
 	}
 };
@@ -66,14 +72,18 @@ const redirectUrl = async (req, res) => {
 const getUrlAnalytics = async (req, res) => {
 	try {
 		const shortId = req.params.id;
-		const { visitHistory } = await URLModel.findOne({ shortId });
+		const document = await URLModel.findOne({ shortId });
 
-		const totalVisit = visitHistory.length;
+		if (!document) {
+			return res.status(404).json({ error: "Short URL not found" });
+		}
+
+		const totalVisit = document.visitHistory.length;
 
 		res.json({
 			message: "Success",
 			totalVisit,
-			analytics: visitHistory,
+			analytics: document.visitHistory,
 		});
 	} catch (error) {
 		res.status(500).json({ message: "Internal server error", error });
