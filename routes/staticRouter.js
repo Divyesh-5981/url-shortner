@@ -8,6 +8,7 @@ router.get("/", async (_req, res) => {
 
 	res.render("Home", {
 		urls: allUrls,
+		specificStylesheet: 'home.css'
 	});
 });
 

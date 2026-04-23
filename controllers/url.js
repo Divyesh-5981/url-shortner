@@ -19,6 +19,7 @@ const createUrl = async (req, res) => {
 
 		return res.status(201).render("Home", {
 			shortId: shortURL,
+			specificStylesheet: 'home.css'
 		});
 	} catch (error) {
 		res.status(500).json({ message: "Internal server error", error });

@@ -28,6 +28,8 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 // Built-in Middleware
+// This tells Express: "Look inside the public folder for any file requested"
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", staticRouter);
