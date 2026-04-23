@@ -11,3 +11,22 @@ body {
   min-height: 100vh;
   padding: 60px 20px;
 }
+
+.alert {
+  background: #1a1a1a;
+  color: #a3a3a3;
+  border: 1px solid #2a2a2a;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.alert-danger {
+  background: #2a1a1a;
+  color: #a33a3a;
+  border: 1px solid #5c2a2a;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('partials/head') %>
+	<body>
+		<div class="signup-container">
+			<div class="signup-header">
+				<div class="badge">Get Started</div>
+				<h1>Create your<br />account</h1>
+				<p>Sign up to start shortening and tracking your URLs.</p>
+			</div>
+
+			<% if (locals.message) { %>
+				<div class="alert alert-danger" role="alert">
+					<%= locals.message %>
+				</div>
+			<% } %>
+
+			<div class="signup-card">
+				<form action="/api/user/" method="post">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input
+							id="name"
+							type="text"
+							name="name"
+							placeholder="Enter your name"
+							autocomplete="name"
+							required
+						/>
+					</div>
+
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input
+							id="email"
+							type="email"
+							name="email"
+							placeholder="you@example.com"
+							autocomplete="email"
+							required
+						/>
+					</div>
+
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input
+							id="password"
+							type="password"
+							name="password"
+							placeholder="Create a password"
+							autocomplete="new-password"
+							required
+						/>
+					</div>
+
+					<button type="submit" class="signup-btn">Sign Up →</button>
+				</form>
+
+				<div class="login-link">
+					Already have an account? <a href="/login">Log in</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

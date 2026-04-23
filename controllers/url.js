@@ -17,7 +17,7 @@ const createUrl = async (req, res) => {
 			visitHistory: [],
 		});
 
-		return res.status(201).render("Home", {
+		return res.status(201).render("home", {
 			shortId: shortURL,
 			specificStylesheet: 'home.css'
 		});

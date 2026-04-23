@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('partials/head') %>
+	<body>
+		<div class="login-container">
+			<div class="login-header">
+				<div class="badge">Welcome Back</div>
+				<h1>Log in to your<br />account</h1>
+				<p>Enter your credentials to access your URLs.</p>
+			</div>
+
+			<% if (locals.message) { %>
+				<div class="alert alert-danger" role="alert">
+					<%= locals.message %>
+				</div>
+			<% } %>
+
+			<div class="login-card">
+				<form action="/api/user/login" method="post">
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input
+							id="email"
+							type="email"
+							name="email"
+							placeholder="Enter your email"
+							autocomplete="username"
+							required
+						/>
+					</div>
+
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input
+							id="password"
+							type="password"
+							name="password"
+							placeholder="Enter your password"
+							autocomplete="current-password"
+							required
+						/>
+					</div>
+
+					<button type="submit" class="login-btn">Log In →</button>
+				</form>
+
+				<div class="signup-link">
+					Don't have an account? <a href="/signup">Sign up</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
