@@ -47,6 +47,9 @@
 								<th>#</th>
 								<th>Short URL</th>
 								<th>Original URL</th>
+								<% if (locals.showCreator) { %>
+									<th>Created By</th>
+								<% } %>
 								<th>Clicks</th>
 							</tr>
 						</thead>
@@ -64,6 +67,11 @@
 											<%= url.redirectURL %>
 										</a>
 									</td>
+									<% if (locals.showCreator) { %>
+										<td>
+											<%= url.createdBy?.name || url.createdBy?.email || "Unknown user" %>
+										</td>
+									<% } %>
 									<td>
 										<span class="clicks-badge">
 											<%= url.visitHistory.length %> clicks

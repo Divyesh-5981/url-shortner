@@ -15,22 +15,23 @@ const createUrl = async (req, res) => {
 			shortId: shortURL,
 			redirectURL: url,
 			visitHistory: [],
+			createdBy: req.user.id,
 		});
 
 		return res.status(201).render("home", {
 			shortId: shortURL,
-			specificStylesheet: 'home.css'
+			specificStylesheet: "home.css",
 		});
 	} catch (error) {
 		res.status(500).json({ message: "Internal server error", error });
 	}
 };
 
-const getUrls = async (_req, res) => {
+const getUrls = async (req, res) => {
 	try {
 		const allUrls = await URLModel.find({});
 
-		res.status(200).json({ message: "Success", data: allUrls });
+		res.status(200).json({ message: "Success", data: allUrls, user: req.user });
 	} catch (error) {
 		res.status(500).json({ message: "Internal server error", error });
 	}

@@ -1,11 +1,13 @@
 import express from "express";
 import "dotenv/config";
+import cookieParser from "cookie-parser";
 import path from "path";
 
 import connectMongoDB from "./connection.js";
-import urlRouter from "./routes/url.js";
+import { CheckForAuthentication} from "./middlewares/auth.js";
 import staticRouter from "./routes/staticRouter.js";
-import UserRouter from "./routes/user.js"
+import urlRouter from "./routes/url.js";
+import UserRouter from "./routes/user.js";
 
 const app = express();
 const URL = process.env.MONGO_URI;
@@ -15,9 +17,12 @@ const USER_ROUTE = "/api/user";
 
 // Built-in Middleware
 // This tells Express: "Look inside the public folder for any file requested"
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(CheckForAuthentication);
+
 app.use(USER_ROUTE, UserRouter);
 app.use(URL_ROUTE, urlRouter);
 app.use("/", staticRouter);
@@ -37,7 +42,3 @@ connectMongoDB(URL)
 	.catch((error) => {
 		console.error("❌❌ MongoDB connection error:", error);
 	});
-
-
-
-

@@ -1,9 +1,9 @@
 import express from "express";
 import {
-	deleteUrls,
 	createUrl,
-	getUrls,
+	deleteUrls,
 	getUrlAnalytics,
+	getUrls,
 	redirectUrl,
 } from "../controllers/url.js";
 
